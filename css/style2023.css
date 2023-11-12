@@ -119,6 +119,24 @@ section{
 }
 
 
+nav a.active {
+   position: relative;
+   color: #ffffff;
+   text-decoration: none; /* Remove the default underline */
+}
+
+nav a.active::after {
+   content: '';
+   display: block;
+   position: absolute;
+   bottom: -2px; /* Adjust the thickness of the underline */
+   left: 0;
+   width: 100%;
+   height: 2px; /* Adjust the height of the underline */
+   background-color: var(--green); /* Highlight color */
+   transform: scaleX(1); /* Set the initial state to visible */
+   transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
  
 
 .title{
@@ -152,7 +170,13 @@ input[type="submit"] {
 
  
 
- 
+  .promo{
+  
+   font-size: 18px; /* Adjust the font size to make it larger */
+   /* Add additional styling for the promo code box if needed */
+   color: red;
+
+ }
 
 .btn:hover,
 .option-btn:hover,
@@ -433,7 +457,7 @@ input[type="submit"] {
 .header .header-2 .flex .navbar a{
    margin:0 1rem;
    font-size: 2rem;
-   color:var(--light-color);
+   color:white;
 }
 
  
@@ -623,6 +647,14 @@ letter-spacing: 0em;
       background-color: #FFF9F1;
 }
 
+   .promo-code-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      background-color: #f9f9f9;
+      font-size: 18px; /* Adjust the font size to make it larger */
+      /* Add additional styling for the promo code box if needed */
+  }
  
 
 .products .box-container .box .image{

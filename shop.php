@@ -25,7 +25,8 @@ if(isset($_POST['add_to_cart'])){
    if(mysqli_num_rows($check_cart_numbers) > 0){
       $message[] = 'already added to cart!';
    }else{
-      mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image, Description ) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image','$product_description')") or die('query failed');
+      mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed2');
+
       $message[] = 'product added to cart!';
    }
 
@@ -65,6 +66,24 @@ if(isset($_POST['add_to_cart'])){
 
       <h3>Why are we different?</h3>
       <p> We don’t just make your coffee, we make your day!</p>
+       <p>Try our promo codes when you spend more than R130 <div style="color: red; font-size: 24px;" class="promo"><?php
+    $select_promo_codes = mysqli_query($conn, "SELECT * FROM `promo_codes`") or die('query failed');
+    if (mysqli_num_rows($select_promo_codes) > 0) {
+        while ($fetch_promo_code = mysqli_fetch_assoc($select_promo_codes)) {
+            
+      
+            echo '<div class="promo-code-box">';
+            echo 'Promo Code: ' . $fetch_promo_code['code'];
+            echo  '    
+                Discount: ' . $fetch_promo_code['discount_percentage'] . '%';
+            echo '</div>';
+        }
+    } else {
+        echo '<p class="empty">No promo codes available yet!</p>';
+    }
+    ?>
+    </div></p>
+      
      <h3>Tea</h3>
 
    </div>
@@ -173,7 +192,7 @@ if(isset($_POST['add_to_cart'])){
          <div class="box-container1">
    <div class="box1">
 
-      <h3>Specialty Drinks</h3>
+      <h3>Speciality Drinks</h3>
 
 
    </div>
@@ -188,7 +207,7 @@ if(isset($_POST['add_to_cart'])){
       <?php  
 
  
-         $select_products = mysqli_query($conn, "SELECT * FROM `products` WHERE product_type = 'Specialty Drinks'") or die('query failed');
+         $select_products = mysqli_query($conn, "SELECT * FROM `products` WHERE product_type = 'Speciality Drinks'") or die('query failed');
          if(mysqli_num_rows($select_products) > 0){
             while($fetch_products = mysqli_fetch_assoc($select_products)){
       ?>

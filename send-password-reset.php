@@ -5,11 +5,33 @@ require 'vendor/autoload.php'; // Include SendGrid library
 if (isset($_POST["email"])) {
     $recipientEmail = $_POST["email"]; // Use a different variable for recipient email
 
+    $mysqli = require __DIR__ . "/config.php";
+
+    // Fetch user_type from the database
+    $getUserTypeQuery = $mysqli->prepare("SELECT user_type FROM users WHERE email = ?");
+    $getUserTypeQuery->bind_param("s", $recipientEmail);
+    $getUserTypeQuery->execute();
+    $getUserTypeResult = $getUserTypeQuery->get_result();
+
+    if ($getUserTypeResult->num_rows > 0) {
+        $userData = $getUserTypeResult->fetch_assoc();
+        $userType = $userData['user_type'];
+
+        // Check if the user_type is admin
+        if ($userType === 'admin') {
+            // Redirect to error_admin.php with an error message
+            header('Location: error_admin.php');
+            exit();
+        }
+    } else {
+        // User not found, redirect to login.php with an error message
+        header('Location: login.php?error=user_not_found');
+        exit();
+    }
+
     $token = bin2hex(random_bytes(16));
     $token_hash = hash("sha256", $token);
     $expiry = date("Y-m-d H:i:s", time() + 60 * 5);
-
-    $mysqli = require __DIR__ . "/config.php";
 
     $sql = "UPDATE users
             SET reset_token_hash = ?,
@@ -32,12 +54,12 @@ if (isset($_POST["email"])) {
             $email->setTemplateId("d-0af61a9c4df54f23abd73a4087a77ac1"); // Set the template ID
 
             // Set dynamic template data (replace placeholders in the template)
-            $email->addDynamicTemplateData("reset_link", "http://localhost:3000/reset-password.php?token=$token");
+            $email->addDynamicTemplateData("reset_link", "https://micoffe.store/reset-password.php?token=$token");
             $email->addTo($recipientEmail, "Recipient Name"); // Set recipient's email
 
             try {
                 $response = $sendgrid->send($email);
-            
+
                 if ($response->statusCode() == 202) {
                     header('Location: success.php'); // Redirect to success.php
                     exit();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
+    <title>Payment Success</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,18 +44,18 @@
 <body>
 <div class="form-container">
     <div class="error-container">
-        <h1>Successful</h1>
+        <h1>Payment Successful</h1>
         <p class="error-message">
             <?php
             // Check if the "message" parameter is set in the URL
             if (isset($_GET['message'])) {
                 echo $_GET['message'];
             } else {
-                echo 'An email has being sent to you.';
+                echo ' Your order has been stored in the order history page .';
             }
             ?>
         </p>
-        <a class="back-button" href="home.php">Back to Home</a>
+        <a class="back-button" href="orders.php">View receipt</a>
     </div>
 </div>
 </body>

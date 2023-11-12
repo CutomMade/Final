@@ -95,6 +95,10 @@
                         echo '<p>email : <span>' . $_SESSION['user_email'] . '</span></p>';
                         echo '<a href="logout.php" class="delete-btn">logout</a>';
                     }
+                    else {
+                  // Display login button if the user is not logged in
+                  echo '<a href="login.php" class="btn">Login</a>';
+               }
                     ?>
                 </div>
             </div>

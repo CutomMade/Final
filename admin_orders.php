@@ -40,6 +40,31 @@ if(isset($_GET['delete'])){
   <link rel="stylesheet" href="css/admin_style.css">
 
    <style>
+/*table {*/
+/*  background-color: var(--color-white);*/
+/*  width: 100%;*/
+/*  padding: var(--card-padding);*/
+/*  text-align: center;*/
+/*  box-shadow: var(--box-shadow);*/
+/*  border-radius: var(--card-border-radius);*/
+/*  transition: all 0.3s ease;*/
+/*}*/
+
+/*table:hover {*/
+/*  box-shadow: none;*/
+/*}*/
+
+/*table tbody td {*/
+/*  height: 2.8rem;*/
+/*  border-bottom: 1px solid var(--color-light);*/
+/*  color: var(--color-dark-variant);*/
+/*}*/
+
+/*table tbody tr:last-child td {*/
+/*  border: none;*/
+/*}*/
+
+/* Default styles for all screen sizes */
 table {
   background-color: var(--color-white);
   width: 100%;
@@ -63,6 +88,65 @@ table tbody td {
 table tbody tr:last-child td {
   border: none;
 }
+
+/* Common styles for all screen sizes */
+.orders {
+  margin: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.box-container {
+  overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .orders {
+    margin: 20px 50px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .box-container {
+    overflow-x: visible;
+  }
+
+  table {
+    width: auto;
+  }
+}
+
+/* Smartphone and tablet styles */
+@media (max-width: 767px) {
+  .orders {
+    margin: 20px 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  th, td {
+    padding: 5px;
+  }
+}
+
 
 
 
@@ -125,7 +209,7 @@ table tbody tr:last-child td {
                 <option value="completed">completed!</option>
               </select>
               <!--<input type="submit" value="Update" name="update_order" class="option-btn">-->
-              <a href="admin_orders.php?delete=<?= $fetch_orders['id']; ?>" onclick="return confirm('Delete this order?');" class="delete-btn">Delete</a>
+              <a href="admin_orders.php?delete=<?= $fetch_orders['id']; ?>" onclick="return confirm('Delete this order?');" class="delete2-btn">Delete</a>
             </form>
           </td>
         </tr>
@@ -149,7 +233,7 @@ table tbody tr:last-child td {
 
 
 <!-- Reset button -->
-<button type="button" id="resetButton">Reset Sales Data</button>
+<!--<button type="button" id="resetButton">Reset Sales Data</button>-->
 
 
 

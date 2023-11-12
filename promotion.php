@@ -49,7 +49,7 @@ if (isset($_POST['add_product'])) {
                 $message[] = 'Image size is too large';
             } else {
                 move_uploaded_file($image_tmp_name, $image_folder);
-                $message[] = 'Product added successfully!';
+                $message[] = 'Promotion added successfully!';
             }
         } else {
             $message[] = 'Failed to add product!';
@@ -159,12 +159,7 @@ input::placeholder {
 <?php include 'admin_header.php'; ?>
 
 <section class="add-products">
-    <div class="box-container1">
-        <div class="box1">
-            <h3>Enjoy a new blend of coffee style</h3>
-            <p>Explore all flavors of coffee with us. There is always a new cup worth experiencing</p>
-        </div>
-    </div>
+
     <div class="pros">
         <span>
             <form action="" method="post" enctype="multipart/form-data">

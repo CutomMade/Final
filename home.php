@@ -58,6 +58,24 @@ if(isset($_POST['add_to_cart'])){
      
       <h3>Coffee</h3>
       <p>It is best to start your day with a cup of coffee. Discover the best flavours coffee you will ever have. We provide the best for our customers.</p>
+   <p>Also try our promo codes when you spend more than R130 <div style="color: red; font-size: 24px;" class="promo"><?php
+    $select_promo_codes = mysqli_query($conn, "SELECT * FROM `promo_codes`") or die('query failed');
+    if (mysqli_num_rows($select_promo_codes) > 0) {
+        while ($fetch_promo_code = mysqli_fetch_assoc($select_promo_codes)) {
+            
+      
+            echo '<div class="promo-code-box">';
+            echo 'Promo Code: ' . $fetch_promo_code['code'];
+            echo  '    
+                Discount: ' . $fetch_promo_code['discount_percentage'] . '%';
+            echo '</div>';
+        }
+    } else {
+        echo '<p class="empty">No promo codes available yet!</p>';
+    }
+    ?>
+    </div></p>
+   
       <a href="shop.php" class="white-btn">Go to Menu</a>
    </div>
 

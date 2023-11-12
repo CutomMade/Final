@@ -51,54 +51,7 @@ if(mysqli_num_rows($select_completed_monthly) > 0){
     }
 }
  
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['special_code'])) {
-    $specialCode = mysqli_real_escape_string($conn, $_POST['special_code']);
-    $correctCode = "MiCoffeeAdmin007"; // Replace this with your correct special code
- 
-    // Check if the entered special code is correct
-    if ($specialCode === $correctCode) {
-        // Fetch analytics data from the database
-        $selectCompleted = mysqli_query($conn, "SELECT SUM(total_price) as total_completed FROM `orders` WHERE payment_status = 'completed'");
-        $total_completed = mysqli_fetch_assoc($selectCompleted)['total_completed'];
- 
-        $selectPending = mysqli_query($conn, "SELECT SUM(total_price) as total_pendings FROM `orders` WHERE payment_status = 'pending'");
-        $total_pendings = mysqli_fetch_assoc($selectPending)['total_pendings'];
- 
-        $selectUsers = mysqli_query($conn, "SELECT COUNT(*) as number_of_users FROM `users` WHERE user_type = 'user'");
-        $number_of_users = mysqli_fetch_assoc($selectUsers)['number_of_users'];
- 
-        $selectAdmins = mysqli_query($conn, "SELECT COUNT(*) as number_of_admins FROM `users` WHERE user_type = 'admin'");
-        $number_of_admins = mysqli_fetch_assoc($selectAdmins)['number_of_admins'];
- 
-        $selectOrders = mysqli_query($conn, "SELECT COUNT(*) as number_of_orders FROM `orders`");
-        $number_of_orders = mysqli_fetch_assoc($selectOrders)['number_of_orders'];
- 
-        $emailContent = "Completed Payments: R{$total_completed}\n";
-        $emailContent .= "Total Pendings: R{$total_pendings}\n";
-        $emailContent .= "Customer Accounts: {$number_of_users}\n";
-        $emailContent .= "Admin Accounts: {$number_of_admins}\n";
-        $emailContent .= "Order Placed: {$number_of_orders}\n";
-        $emailContent .= "Completed Payments Today: R{$total_completed_today}\n";
-        $emailContent .= "Completed Payments This Week: R{$total_completed_weekly}\n";
-        $emailContent .= "Completed Payments This Month: R{$total_completed_monthly}\n";
- 
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom("denzelhadebe7@gmail.com", "MiCoffee");
-        $email->setSubject("Analytics Report");
-        $email->addTo("daniel.lukayi@gmail.com", "Recipient Name");
-        $email->addContent("text/plain", $emailContent);
- 
-        $sendgrid = new \SendGrid('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'); // Replace with your SendGrid API key
-        try {
-            $response = $sendgrid->send($email);
-            echo '<span style="color: white;">Email sent successful</span>';
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-    } else {
-        echo '<span style="color: white;">Invalid code. Try again!</span>';
-    }
-}
+
 ?>
  
  
@@ -220,56 +173,6 @@ table tbody tr:last-child td {
             <div class="analyse">
  
  
- 
-                <div class="sales">
-                    <div class="status">
-                        <div class="info">
-                        <img src="images/logo.png" alt="Description of the image">
-         <?php
-            $total_completed = 0;
-            $select_completed = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'completed'") or die('query failed');
-            if(mysqli_num_rows($select_completed) > 0){
-               while($fetch_completed = mysqli_fetch_assoc($select_completed)){
-                  $total_price = $fetch_completed['total_price'];
-                  $total_completed += $total_price;
-               };
-            };
-         ?>        
-         <h3>Completed Payments</h3>
-         <h1>R<?php echo $total_completed; ?></h1>
- 
-                        </div>
- 
-                    </div>
-                </div>
- 
- 
- 
- 
-                <div class="sales">
-                    <div class="status">
-                        <div class="info">
-                        <img src="images/logo.png" alt="Description of the image">
-         <?php
-            $total_pendings = 0;
-            $select_pending = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'pending'") or die('query failed');
-            if(mysqli_num_rows($select_pending) > 0){
-               while($fetch_pendings = mysqli_fetch_assoc($select_pending)){
-                  $total_price = $fetch_pendings['total_price'];
-                  $total_pendings += $total_price;
-               };
-            };
-         ?>  
-         <h3>Total Pendings</h3>
-         <h1>R<?php echo $total_pendings; ?></h1>
-                        </div>
-                       
-                    </div>
-                </div>
- 
- 
- 
- 
 <div class="status" onclick="location.href='customer.php';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
@@ -288,23 +191,7 @@ table tbody tr:last-child td {
                 </div>
  
  
-                                <div class="sales">
-                    <div class="status">
-                        <div class="info">
-                        <img src="images/logo.png" alt="Description of the image">
-         <?php
-            $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE user_type = 'user'") or die('query failed');
-            $number_of_users = mysqli_num_rows($select_users);
-         ?>
- 
-         <h3>Customer Accounts</h3>
-         <h1><?php echo $number_of_users; ?></h1>
-         
- 
-                        </div>
-                       
-                    </div>
-                </div>
+                    
  
  
 <div class="status" onclick="location.href='adminusers.php';" style="cursor: pointer;">
@@ -325,34 +212,24 @@ table tbody tr:last-child td {
                     </div>
                 </div>
  
- 
- 
- 
- 
- 
- 
- 
- 
-                 <div class="sales">
-                    <div class="status">
-                        <div class="info">
-                        <img src="images/logo.png" alt="Description of the image">
-         <?php
-            $select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('query failed');
-            $number_of_orders = mysqli_num_rows($select_orders);
-           
-         ?>
-         
-         <h3>Order Placed</h3>
-         <h1><?php echo $number_of_orders; ?></h1>
- 
-         
- 
- 
-                        </div>
-                       
-                    </div>
-                </div>
+
+<div class="status" onclick="location.href='admin_orders.php';" style="cursor: pointer;">
+    
+         <div class="status">
+            <div class="info">
+                <img src="images/logo.png" alt="Description of the image">
+                <?php
+                            $select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('query failed');
+                            $number_of_orders = mysqli_num_rows($select_orders);
+                         ?>
+                <h3>Order Placed</h3>
+                <h1><?php echo $number_of_orders; ?></h1>
+
+
+            </div>
+        </div>
+</div>
+        
                 
                 
                 
@@ -426,9 +303,7 @@ table tbody tr:last-child td {
                        
                     </div>
                 </div>
-               
-               
-               
+
             </div>
  
          </main>
@@ -439,11 +314,7 @@ table tbody tr:last-child td {
  
  
  
-<form method="post">
-    <label for="special_code">Enter code for the analysis report to be sent to the email:</label>
-    <input type="text" id="special_code" name="special_code" required>
-    <button type="submit" name="submit">Submit</button>
-</form>
+
  
  
  

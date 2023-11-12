@@ -55,6 +55,66 @@ table tbody td {
 table tbody tr:last-child td {
   border: none;
 }
+
+
+/* Common styles */
+.users {
+  margin: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.box-container {
+  overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .users {
+    margin: 20px 50px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .box-container {
+    overflow-x: visible;
+  }
+
+  table {
+    width: auto;
+  }
+}
+
+/* Smartphone and tablet styles */
+@media (max-width: 767px) {
+  .users {
+    margin: 20px 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  th, td {
+    padding: 5px;
+  }
+}
+
   </style>
 
 </head>

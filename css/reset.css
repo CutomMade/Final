@@ -61,7 +61,8 @@
 html{
    font-size: 62.5%;
    overflow-x: hidden;
-   
+   background: url(../images/forgot1.jpg) no-repeat;
+   background-size: cover;
   
 }
 
@@ -72,7 +73,6 @@ section{
 }
 
  
-
 
 .empty{
    padding:1.5rem;
@@ -85,55 +85,25 @@ section{
 
  
 
-.message {
-   position: fixed;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%) scale(1.2); /* Increase width and height by 1.2 times */
-   background-color: var(--green);
-   color: #faf5f5;
-   padding: 1rem;
-   border-radius: 10px;
-   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-   max-width: 180%; /* Increase the max-width to 180% */
-   text-align: center;
-   opacity: 0;
-   transition: opacity 0.3s ease-in-out;
-   z-index: 1000;
+.message{
+   position: sticky;
+   top:0;
+   margin:0 auto;
+   max-width: 1200px;
+   background-color: var(--white);
+   padding:2rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   z-index: 10000;
+   gap:1.5rem;
 }
 
-nav a.active {
-   position: relative;
-   color: #ffffff;
-   text-decoration: none; /* Remove the default underline */
-}
-
-nav a.active::after {
-   content: '';
-   display: block;
-   position: absolute;
-   bottom: -2px; /* Adjust the thickness of the underline */
-   left: 0;
-   width: 100%;
-   height: 2px; /* Adjust the height of the underline */
-   background-color: var(--green); /* Highlight color */
-   transform: scaleX(1); /* Set the initial state to visible */
-   transition: transform 0.3s ease; /* Add a smooth transition effect */
-}
-.message.show {
-   opacity: 1;
-}
-
-.message.hidden {
-   top: -100px;
-}
-
-
-
+ 
 
 .message span{
    font-size: 2rem;
-   color:white;
+   color:var(--black);
 }
 
  
@@ -228,7 +198,8 @@ input[type="submit"] {
    align-items: center;
    justify-content: center;
    gap:1rem;
-   background-color: black;
+   /* background: url(../images/heading-bg.webp.jpg) no-repeat; */
+   background: url(../images/forgot1.jpg) no-repeat;
    background-size: cover;
    background-position: center;
    text-align: center;
@@ -274,7 +245,7 @@ input[type="submit"] {
 
 .form-container {
    min-height: 100vh;
-   background-image: url(../images/forgot1.jpg); 
+    /* background-image: url(../images/forgot1.jpg);   */
    background-size: cover; 
    background-position: center; 
    display: flex;
@@ -282,12 +253,7 @@ input[type="submit"] {
    justify-content: center;
    padding: 2rem;
    position: relative; 
-   
-   /*position: relative;*/
-    /*right: 53.5rem;*/
 }
-
-
 
  
 
@@ -298,14 +264,7 @@ input[type="submit"] {
    box-shadow: var(--box-shadow);
    background-color: rgba(255, 255, 255, 0.0); 
    text-align: center;
-   
-   /*position: relative;*/
-   /* right: 53.5rem;*/
-   /* top: 5rem;*/
 }
-
-
-
 
  
 
@@ -347,24 +306,6 @@ input[type="submit"] {
 
 .form-container form p a:hover{
    text-decoration: underline;
-}
-
-.logo-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   text-align:center;
-   margin-top: 1rem;
-}
-
-.logo-container img {
-   max-width: 300%;
-   height: auto;
-   
-   
-   /*position: relative;*/
-   /* bottom: 20em;*/
-   /* left: 35rem;*/
 }
 
  /*.header.header-1.header-2{*/
@@ -461,13 +402,7 @@ input[type="submit"] {
 .header .header-1 .flex p a:hover{
    text-decoration: underline;
 }
-.promo-code-box{
-  
-   font-size: 18px; /* Adjust the font size to make it larger */
-   /* Add additional styling for the promo code box if needed */
-   color: red;
 
- }
  
 .nuts{
     display: flex;
@@ -480,6 +415,9 @@ input[type="submit"] {
 .header .header-2 .flex .logo{
    font-size: 2.5rem;
    color:var(--green);
+
+   /* position: relative;
+   right: 25rem; */
 }
 
  
@@ -488,6 +426,9 @@ input[type="submit"] {
    margin:0 1rem;
    font-size: 2rem;
    color:white;
+
+   position: relative;
+   right: 7rem;
 }
 
  
@@ -501,9 +442,9 @@ input[type="submit"] {
 
 .header .header-2 .flex .icons > *{
    font-size: 2.5rem;
-   color: white;
+   color:var(--black);
    cursor: pointer;
-   margin-left: 1.5rem;
+   /* margin-left: 1.5rem; */
 }
 
  
@@ -564,7 +505,7 @@ input[type="submit"] {
 
 .home{
    min-height: 70vh;
-   background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/example2.jpg) no-repeat;
+   background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/forgot.jpg) no-repeat;
    background-size: cover;
    background-position: center;
    display: flex;
@@ -611,7 +552,7 @@ letter-spacing: 0em;
 
 /*the  products heading*/
 
-      .product .box-container1 .box1 {
+      .products .box-container1 .box1 {
               /* Center text */
       text-align: center;
 
@@ -627,7 +568,7 @@ letter-spacing: 0em;
 
 
 
-        .product .box-container1  .box1 h3 {
+        .products .box-container1  .box1 h3 {
       text-transform: uppercase;
       color: var(--black);
       font-size: 4rem;
@@ -638,7 +579,7 @@ letter-spacing: 0em;
 
  
 
- .product .box-container1 .box1 p,
+ .products .box-container1 .box1 p,
     .different .box-container .box a {
       display: inline-block;
       font-size: 1.7rem;
@@ -650,77 +591,70 @@ letter-spacing: 0em;
 
 
  
-.products .box-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
 
-.product-item {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-  margin: 10px;
-}
-
-.product-item .image {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  padding: 10px;
-}
-
-.product-item .image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.product-item .details {
-  flex: 1;
-  padding: 10px;
-}
-
-.product-item .details .name {
-  font-weight: bold;
-
-    font-size: 2rem;
-}
-
-.product-item .details form {
-  display: flex;
-  flex-direction: column;
-  box-shadow: none;
-
-
-}
-
-.product-item .details form .btn {
-  /*max-width: 120px;*/
-  
-    text-align: center;
+.products .box-container{
+   max-width: 1200px;
+   margin:0 auto;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 30rem);
+   align-items: flex-start;
+   gap:1.5rem;
+   justify-content: center;
 }
 
  
 
-.products .box-container .product-item .qty{
+.products .box-container .box{
+   border-radius: .5rem;
+   
+   box-shadow: var(--box-shadow);
+   padding:2rem;
+   text-align: center;
+   border:var(--border);
+   position: relative;
+         border: 1px solid black;
+
+      border: 1px solid #F9C06A6B;
+      background-color: #FFF9F1;
+}
+
+ 
+
+.products .box-container .box .image{
+   height: 30rem;
+}
+
+ 
+
+.products .box-container .box .name{
+   padding:1rem 0;
+   font-size: 2rem;
+      color: var(--green);
+   font-style: bold;
+
+      font-family: Playfair Display;
+font-size: 22px;
+font-weight: 700;
+line-height: 29px;
+letter-spacing: 0em;
+}
+
+ 
+
+.products .box-container .box .qty{
    width: 100%;
-   height: 70%;
    padding:1.2rem 1.4rem;
    border-radius: .5rem;
    border:var(--border);
    margin:1rem 0;
-   font-size: 1rem;
+   font-size: 2rem;
 }
 
  
 
-.products .box-container .product-item .price{
+.products .box-container .box .price{
    
-   font-size: 1.7rem;
+   font-size: 2.5rem;
    font-style: bold;
 
    color: var(--green);
@@ -733,38 +667,7 @@ letter-spacing: 0em;
 
 
 }
- .products .box-container .product-item .sub-total span{
-   color: var(--green);
-}
 
-/*
-.products .box-container .product-item .fa-times{
-   position: absolute;
-   top:1rem; right:1rem;
-   height: 4.5rem;
-   width: 4.5rem;
-   line-height: 4.5rem;
-   font-size: 2rem;
-   background-color: var(--red);
-   color:var(--white);
-   border-radius: .5rem;
-}*/
-.product-item .fa-times {
-  position: absolute;
-
-  
-
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  font-size: 18px;
-  text-align: center;
-  background-color: #ff0000;
-  color: #fff;
-  border-radius: 50%;
-  z-index: 1;
-}
 
 .about .flex{
    max-width: 1200px;
@@ -845,7 +748,6 @@ letter-spacing: 0em;
  
 
 
- 
 
 .contact form{
    margin:0 auto;
@@ -864,7 +766,7 @@ letter-spacing: 0em;
    font-size: 2.5rem;
    text-transform: uppercase;
    margin-bottom: 1rem;
-   color:var(--black);
+   color:var(--green);
 }
 
  
@@ -983,7 +885,7 @@ letter-spacing: 0em;
 
  
 
-.box-container .box .sub-total span{
+.shopping-cart .box-container .box .sub-total span{
    color: var(--green);
 }
 
@@ -1070,7 +972,7 @@ letter-spacing: 0em;
  
 
 .display-order .grand-total span{
-   color:var(--red);
+   color:var(--green);
 }
 
  
@@ -1317,7 +1219,7 @@ margin-bottom: 3.5rem;
    .header .header-2 .flex .navbar{
       position: absolute;
       top:99%; left:0; right:0;
-      background-color: black;
+      background-color: var(--white);
       border-top: var(--border);
       border-bottom: var(--border);
       clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
@@ -1668,91 +1570,6 @@ different {
 
 
 
-/*the  products heading*/
-
-      .product .box-container1 .box1 {
-              /* Center text */
-      text-align: center;
-
-      /* Center images */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      /* Flex direction */
-      flex-direction: column;
-
-    }
-
-
-
-        .product .box-container1  .box1 h3 {
-      text-transform: uppercase;
-      color: var(--black);
-      font-size: 4rem;
-      padding-bottom: 2rem;
-      color: #4A8522;
-      text-align: center;
-    }
-
- 
-
- .product .box-container1 .box1 p,
-    .different .box-container .box a {
-      display: inline-block;
-      font-size: 1.7rem;
-      color: var(--light-color);
-      padding: 1rem 0;
-      color: #000;
-      text-align: center;
-    }
-
-.product-item {
-  display: flex;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.product-item .image {
-  flex: 1;
-}
-
-.product-item .image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.product-item .details {
-  flex: 2;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.product-item .details h3 {
-  margin: 0;
-}
-
-.product-item .details p {
-  margin: 10px 0;
-}
-
-.product-item .details form {
-  display: flex;
-  align-items: center;
-}
-
-
-
-
-/*ForgotPassword*/
-
-
-
     .form-containerr {
       min-height: 100vh;
       background-image: url(../images/forgot1.jpg);
@@ -1826,8 +1643,11 @@ different {
       display: block;
       width: 100%;
       padding: 10px;
-      background-color: #green;
-      color: #fff;
+      /* background-color: #green; */
+      background-color: #3b9834;
+      /* background-color: #green; */
+      color: black;
+     
       border: none;
       cursor: pointer;
       border-radius: 5px;
@@ -1847,4 +1667,3 @@ different {
           transform: scale(1.05);
       }
   }
-

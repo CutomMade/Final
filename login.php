@@ -3,6 +3,8 @@ require_once 'email.php';
 include 'config.php';
 session_start();
 
+$message = array(); // Ensure $message is defined
+
 if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password']; // No need to hash it here
@@ -33,6 +35,8 @@ if (isset($_POST['submit'])) {
     // No matching user found
     if (!$found) {
         $message[] = 'Incorrect email or password!';
+        // Debug statement
+        // echo 'Debug: Incorrect email or password added to $message array.';
     }
 }
 ?>
@@ -43,27 +47,50 @@ if (isset($_POST['submit'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>login</title>
+   <title>Login</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/style2023.css">
 
+   <style>
+      .message-container {
+         position: fixed;
+         top: 0;
+         left: 50%;
+         transform: translateX(-50%);
+         width: 300px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         z-index: 9999;
+      }
+
+      .message {
+         background-color: #77d537;
+         color: #8b0000;
+         padding: 10px;
+         margin-top: 5px;
+         border-radius: 5px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         width: 100%;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+   </style>
 </head>
 <body>
 
 <?php
-if(isset($message)){
-   foreach($message as $message){
-      echo '
-      <div class="message">
-         <span>'.$message.'</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
-   }
+if (isset($message) && !empty($message)) {
+    echo '<div class="message-container">';
+    foreach($message as $messageItem){
+        echo '<div class="message"><span>' . $messageItem . '</span><i class="fas fa-times" onclick="this.parentElement.remove();"></i></div>';
+    }
+    echo '</div>';
 }
 ?>
    
@@ -73,12 +100,12 @@ if(isset($message)){
         <div class="logo-container">
         <img src="images\logo.png" alt="Your Logo">
     </div>
-      <h3>login now</h3>
-      <input type="email" name="email" placeholder="enter your email" required class="box">
-      <input type="password" name="password" placeholder="enter your password" required class="box">
-      <input type="submit" name="submit" value="login now" class="btn">
-      <p>don't have an account? <a href="register.php">register now</a></p>
-      <p><a href="forgot-password.php">Forgot password?</a></p>  
+      <h3>Login Now</h3>
+      <input type="email" name="email" placeholder="Enter your email" required class="box">
+      <input type="password" name="password" placeholder="Enter your password" required class="box">
+      <input type="submit" name="submit" value="Login Now" class="btn">
+      <p>Don't have an account? <a href="register.php">Register Now</a></p>
+      <p><a href="forgot-password.php">Forgot Password?</a></p>  
    </form>
 
 </div>

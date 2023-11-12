@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
+<meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Error</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <link rel="stylesheet" href="css/style2023.css">
+   
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,21 +46,20 @@
     </style>
 </head>
 <body>
-<div class="form-container">
+    
     <div class="error-container">
-        <h1>Successful</h1>
+        <h1>Error</h1>
         <p class="error-message">
             <?php
             // Check if the "message" parameter is set in the URL
             if (isset($_GET['message'])) {
                 echo $_GET['message'];
             } else {
-                echo 'An email has being sent to you.';
+                echo 'Not permitted to reset password. Please contact the technical admin to reset your password.';
             }
             ?>
         </p>
-        <a class="back-button" href="home.php">Back to Home</a>
+        <a class="back-button" href="login.php">Back to login</a>
     </div>
-</div>
 </body>
 </html>

@@ -679,7 +679,7 @@ section{
 }
 
 
-.delete-btn {
+.delete2-btn {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.3rem 1.2rem; /* Adjusted padding to make the delete button smaller */
@@ -688,7 +688,7 @@ section{
   font-size: 1rem; /* Reduced font size */
   border-radius: var(--border-radius);
   text-transform: capitalize;
-  background-color: #4A8522;
+  background-color: #c0392b;
   color: black;
   border: none;
 }

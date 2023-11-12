@@ -30,6 +30,7 @@ if(isset($_GET['delete_all'])){
 
 
 
+
 // Generate the random code
 $random_number = mt_rand(10000, 99999);
 $random_letters = chr(mt_rand(65, 90)) . chr(mt_rand(65, 90)) . chr(mt_rand(65, 90));
@@ -124,7 +125,39 @@ $_SESSION['random_code'] = $random_code;
    <p> <a href="home.php">home</a> / cart </p>
 </div>
 
+<section class="product">
 
+         <div class="box-container1">
+   <div class="box1">
+
+      <h3>Thanks for shopping with Us</h3>
+    
+      <p><strong>Apply our promo codes when you spend more than R130</strong> <div style="color: red; font-size: 24px;" class="promo"><?php
+    $select_promo_codes = mysqli_query($conn, "SELECT * FROM `promo_codes`") or die('query failed');
+    if (mysqli_num_rows($select_promo_codes) > 0) {
+        while ($fetch_promo_code = mysqli_fetch_assoc($select_promo_codes)) {
+            
+      
+            echo '<div class="promo-code-box">';
+            echo 'Promo Code: ' . $fetch_promo_code['code'];
+            echo  '    
+                Discount: ' . $fetch_promo_code['discount_percentage'] . '%';
+            echo '</div>';
+        }
+    } else {
+        echo '<p class="empty">No promo codes available yet!</p>';
+    }
+    ?>
+    </div></p>
+      
+
+   </div>
+</div>
+
+
+ 
+
+</section>
 
    <h1 class="title">products added</h1>
 
@@ -148,7 +181,7 @@ $_SESSION['random_code'] = $random_code;
         <div class="name"><?php echo $fetch_cart['name']; ?></div>
         <div class="price">R<?php echo $fetch_cart['price']; ?></div>
 
-        <div class="description"><?php echo $fetch_cart['Description']; ?></div>
+        
 
         <form action="" method="post">
             <input type="hidden" name="cart_id" value="<?php echo $fetch_cart['id']; ?>">
@@ -204,16 +237,13 @@ $_SESSION['random_code'] = $random_code;
       ?>
 
        
-      
-
-
-     <form action="https://sandbox.payfast.co.za/eng/process" method="post">
+<form action="https://sandbox.payfast.co.za/eng/process" method="post">
     <input type="hidden" name="merchant_id" value="10000100">
     <input type="hidden" name="merchant_key" value="46f0cd694581a">
-    <input type="hidden" name="return_url" value="http://localhost:3000/notify.php">
-    <input type="hidden" name="cancel_url" value="https://www.example.com/cancel">
-    <input type="hidden" name="notify_url" value="http://localhost:3000/home.php">
-    
+    <input type="hidden" name="return_url" value="https://micoffe.store/notify.php">
+    <input type="hidden" name="cancel_url" value="https://micoffe.store/cart.php">
+    <input type="hidden" name="notify_url" value="https://micoffe.store/home.php">
+   
     <!-- Check if discount is applied and grand total is greater than 130 -->
     <?php if (isset($discounted_total) && $grand_total >= 130) : ?>
         <input type="hidden" name="amount" value="<?php echo $discounted_total; ?>">
@@ -222,20 +252,16 @@ $_SESSION['random_code'] = $random_code;
         <input type="hidden" name="amount" value="<?php echo $grand_total; ?>">
         <p>Total: R<?php echo number_format($grand_total, 2); ?></p>
     <?php endif; ?>
-
+ 
     <input type="hidden" name="item_name" value="<?php echo $random_code; ?>">
-    <input type="hidden" name="custom_str1" value="<?php echo $ITN_Payload['m_payment_id']; ?>">
-    <input type="hidden" name="custom_str2" value="<?php echo $ITN_Payload['pf_payment_id']; ?>">
-    <input type="hidden" name="custom_str3" value="<?php echo $ITN_Payload['payment_status']; ?>">
-    <input type="hidden" name="custom_str4" value="<?php echo $ITN_Payload['item_name']; ?>">
-    <input type="hidden" name="custom_str5" value="<?php echo $ITN_Payload['item_description']; ?>">
-
+    
+ 
     <div class="cart-total">
         <p>Total : <span>R<?php echo number_format($grand_total, 2); ?></span></p>
         <?php if (isset($discounted_total)) : ?>
             <p>Discounted Total: R<?php echo number_format($discounted_total, 2); ?></p>
         <?php endif; ?>
-
+ 
         <div style="margin-top: 2rem; text-align:center;">
             <a href="cart.php?delete_all" class="delete-btn <?php echo ($grand_total > 1) ? '' : 'disabled'; ?>"
                 onclick="return confirm('delete all from cart?');">delete all</a>
@@ -243,6 +269,9 @@ $_SESSION['random_code'] = $random_code;
         </div>
     </div>
 </form>
+
+
+     
 </div>
 
 
@@ -318,13 +347,7 @@ if ($payment_status === 'PAID') {
 
 
 
-<?php include 'footer.php'; ?>
 
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-</body>
-</html>
 
 
 

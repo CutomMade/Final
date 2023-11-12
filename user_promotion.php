@@ -4,11 +4,11 @@ include 'config.php';
 
 session_start();
 
-$user_id = $_SESSION['user_id'];
+// $user_id = $_SESSION['user_id'];
 
-if(!isset($user_id)){
-   header('location:login.php');
-}
+// if(!isset($user_id)){
+//   header('location:login.php');
+// }
 
 
 if(isset($_POST['add_to_cart'])){
@@ -71,7 +71,9 @@ if(isset($_POST['add_to_cart'])){
 
       <h3>Online Discounts  </h3>
       <p>Find yourself products and combos that are on promotion and get them a really low prices</p>
-<h2>NOTE PROMO CODES ARE ONLY VALID WHEN YOU SPEND MORE THAN R130 ONLINE</h2>
+     <h2 style="color: red;">COPY THE CODE AND APPLY IT WHEN CHECKING OUT</h2>
+
+<h2 style="color: red;">NOTE PROMO CODES ARE ONLY VALID WHEN YOU SPEND MORE THAN R130 ONLINE</h2>
    </div>
 </div>
 
@@ -113,7 +115,8 @@ if(isset($_POST['add_to_cart'])){
          <div class="box-container1">
    <div class="box1">
 
-      <h3>Micoffe store Promotions  </h3>
+      <h3>Micoffee store Promotions  </h3>
+      <h2>COPY AND PASTE THE CODE WHEN YOU CHECKOUT </h2>
     <h2>NOTE THE BELOW PROMOTIONS ARE ONLY AVAILABLE AT THE MICOFFEE SHOP ONLY </h2>
 
    </div>

@@ -67,7 +67,6 @@
         document.querySelector('.overlay').style.display = 'none';
     }
 </script>
-
 <?php
 include 'config.php';
 require_once 'email.php';
@@ -83,22 +82,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($adminCode !== $correctAdminCode) {
         echo '<script>showPopup("Invalid admin code. Registration not allowed.");</script>';
     } else {
-        $generatedPassword = generatePassword();
-        $hashedPassword = hashPassword($generatedPassword);
-        $user_type = 'admin';
-
-        $checkUserQuery = "SELECT * FROM `users` WHERE `email` = '$email' AND `user_type` = '$allowedUserType'";
-        $checkUserResult = mysqli_query($conn, $checkUserQuery);
-
-        if (mysqli_num_rows($checkUserResult) > 0) {
-            echo '<script>showPopup("User with the same email and user_type ' . $allowedUserType . ' already exists. Registration not allowed.");</script>';
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo '<script>showPopup("Invalid email format. Please enter a valid email address.");</script>';
         } else {
-            $insertUserQuery = "INSERT INTO `users` (name, email, password, user_type) VALUES ('$name', '$email', '$hashedPassword', '$user_type')";
+            $generatedPassword = generatePassword();
+            $hashedPassword = hashPassword($generatedPassword);
+            $user_type = 'admin';
 
-            if (mysqli_query($conn, $insertUserQuery)) {
-                echo '<script>showPopup("Your Password Is: ' . $generatedPassword . '");</script>';
+            $checkUserQuery = "SELECT * FROM `users` WHERE `email` = '$email' AND `user_type` = '$allowedUserType'";
+            $checkUserResult = mysqli_query($conn, $checkUserQuery);
+
+            if (mysqli_num_rows($checkUserResult) > 0) {
+                echo '<script>showPopup("User with the same email and user_type ' . $allowedUserType . ' already exists. Registration not allowed.");</script>';
             } else {
-                echo '<script>showPopup("Error: ' . mysqli_error($conn) . '");</script>';
+                $insertUserQuery = "INSERT INTO `users` (name, email, password, user_type) VALUES ('$name', '$email', '$hashedPassword', '$user_type')";
+
+                if (mysqli_query($conn, $insertUserQuery)) {
+                    echo '<script>showPopup("Your Password Is: ' . $generatedPassword . '");</script>';
+                } else {
+                    echo '<script>showPopup("Error: ' . mysqli_error($conn) . '");</script>';
+                }
             }
         }
     }
@@ -118,5 +122,6 @@ function hashPassword($password) {
     return password_hash($password, PASSWORD_DEFAULT);
 }
 ?>
+
 </body>
 </html>
